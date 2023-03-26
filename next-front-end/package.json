@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.3.0",
+    "diff-match-patch": "^1.0.5",
     "next": "13.2.3",
     "react": "18.2.0",
     "react-ace": "^10.1.0",

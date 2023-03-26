@@ -14,7 +14,7 @@ function CodeEditor({ value, onChange }) {
       onChange={onChange}
       name="ide"
       value={value}
-      fontSize={16}
+      fontSize={12}
       width='100%'
       height='100%'
       showPrintMargin={false}
