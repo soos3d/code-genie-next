@@ -219,6 +219,43 @@ export default function Home() {
     setIsLoading(false);
   };
 
+  const handleBugsClick = async () => {
+    setIsLoading(true);
+    const response = await fetch(`${API_URL}bugs`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ text: value }),
+    });
+
+    // Get the raw JSON string from the response object
+    const responseText = await response.text();
+
+    // Parse the JSON string
+    const responseData = JSON.parse(responseText);
+    const responseValue = responseData.response;
+    // Extract the code and text from the response
+    const extractedData = extractCodeAndText(responseValue);
+
+    // Console.log the parsed response data
+    console.log("response data:", responseData);
+    //console.log(`Response only: ${responseValue}`)
+
+    console.log("Code:", extractedData.code);
+    console.log("Text:", extractedData.text);
+
+    if (extractedData.code) {
+      setValue2(extractedData.code);
+    } else {
+      setValue2("// Something went wrong. Please try again.");
+    }
+
+    setIsLoading(false);
+
+    setIsLoading(false);
+  };
+
   const copyToClipboard = () => {
     navigator.clipboard.writeText(value);
     setShowNotification(true);
@@ -280,6 +317,7 @@ export default function Home() {
               onAddConventionsHandling={handleConventionsClick}
               onAddProfessionalHandling={handleProfessionalClick}
               onAddExplainHandling={handleExplainClick}
+              onBugsHandling={handleBugsClick}
             />
           </div>
           <div className="w-full md:w-3/8 flex-1 mt-4 md:mt-0">
